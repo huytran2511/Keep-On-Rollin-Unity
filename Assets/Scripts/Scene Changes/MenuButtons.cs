@@ -13,6 +13,10 @@ public class MenuButtons : MonoBehaviour
     {
         SceneManager.LoadScene("Credits");
     }
+    public void GoHome()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
     public void QuitGame()
     {
         Debug.Log("Quit!");
