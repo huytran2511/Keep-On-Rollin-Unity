@@ -1,19 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody player;
     public float speed;
-
+    public TMP_Text scoreText;
+    
+    private Rigidbody player;
     private int score;
 
     void Start()
     {
         player = GetComponent<Rigidbody>();
         score = 0;
+        UpdateScoreText();
     }
 
     void FixedUpdate()
@@ -32,7 +35,12 @@ public class PlayerController : MonoBehaviour
         {
             collider.gameObject.SetActive(false);
             score++;
-            Debug.Log("Gem count: " + score);
+            UpdateScoreText();
         }
+    }
+
+    void UpdateScoreText()
+    {
+        scoreText.text = "Score: " + score;
     }
 }
