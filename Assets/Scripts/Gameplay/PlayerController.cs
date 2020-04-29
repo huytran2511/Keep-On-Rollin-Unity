@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody rb;
+    private Rigidbody player;
     public float speed;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>(); 
+        player = GetComponent<Rigidbody>(); 
     }
 
     void FixedUpdate()
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        rb.AddForce(movement * speed);
+        player.AddForce(movement * speed * Time.deltaTime);
 
 
     }
