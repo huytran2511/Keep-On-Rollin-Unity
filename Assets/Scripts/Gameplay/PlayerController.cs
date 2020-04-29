@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using System.Threading;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,10 +11,14 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody player;
     private int score;
+    private GameObject[] gems;
+    private Vector3 startPosition;
 
     void Start()
     {
         player = GetComponent<Rigidbody>();
+        gems = GameObject.FindGameObjectsWithTag("Gem");
+        startPosition = player.position;
         score = 0;
         UpdateScoreText();
     }
@@ -36,11 +40,36 @@ public class PlayerController : MonoBehaviour
             collider.gameObject.SetActive(false);
             score++;
             UpdateScoreText();
+        } 
+        else if (collider.gameObject.CompareTag("Win"))
+        {
+            ResetGameState();
         }
-    }
+        else if (collider.gameObject.CompareTag("GameOver"))
+        {
+            ResetGameState();
+        }
 
+    }
     void UpdateScoreText()
     {
         scoreText.text = "Score: " + score;
+    }
+
+    void ResetGameState()
+    {
+        score = 0;
+        UpdateScoreText();
+
+        // for each gem, set active flag back to true
+        foreach(GameObject gem in gems)
+        {
+            gem.SetActive(true);
+        }
+
+        // set player position and velocity to start
+        player.position = startPosition;
+        player.velocity = Vector3.zero;
+        player.angularVelocity = Vector3.zero;
     }
 }

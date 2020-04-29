@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Gem
+  - GameOver
+  - Win
   layers:
   - Default
   - TransparentFX
