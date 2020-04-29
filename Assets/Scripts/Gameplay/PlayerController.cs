@@ -3,33 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Threading;
+using UnityEngine.UI;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed;
     public TMP_Text scoreText;
-    
+    public TMP_Text loseText, winText;
+    public Button restartButton;
+
     private Rigidbody player;
     private int score;
     private GameObject[] gems;
     private Vector3 startPosition;
+    private bool gameStarted;
 
     void Start()
     {
         player = GetComponent<Rigidbody>();
         gems = GameObject.FindGameObjectsWithTag("Gem");
         startPosition = player.position;
+        restartButton.onClick.AddListener(PlayAgain);
+        gameStarted = true;
         score = 0;
         UpdateScoreText();
     }
 
     void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        if (gameStarted)
+        {
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        player.AddForce(movement * speed * Time.deltaTime);
+            Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+            player.AddForce(movement * speed * Time.deltaTime);
+        }
     }
 
     void OnTriggerEnter(Collider collider)
@@ -43,11 +53,21 @@ public class PlayerController : MonoBehaviour
         } 
         else if (collider.gameObject.CompareTag("Win"))
         {
+            gameStarted = false;
             ResetGameState();
+            winText.text = "You Win!\nFinal score: " + score;
+            winText.gameObject.SetActive(true);
+            restartButton.gameObject.SetActive(true);
+            scoreText.gameObject.SetActive(false);
         }
         else if (collider.gameObject.CompareTag("GameOver"))
         {
+            gameStarted = false;
             ResetGameState();
+            loseText.text = "Game Over!\nFinal score: " + score;
+            loseText.gameObject.SetActive(true);
+            restartButton.gameObject.SetActive(true);
+            scoreText.gameObject.SetActive(false);
         }
 
     }
@@ -58,9 +78,6 @@ public class PlayerController : MonoBehaviour
 
     void ResetGameState()
     {
-        score = 0;
-        UpdateScoreText();
-
         // for each gem, set active flag back to true
         foreach(GameObject gem in gems)
         {
@@ -71,5 +88,20 @@ public class PlayerController : MonoBehaviour
         player.position = startPosition;
         player.velocity = Vector3.zero;
         player.angularVelocity = Vector3.zero;
+    }
+
+    void PlayAgain()
+    {
+        // reset score
+        score = 0;
+        UpdateScoreText();
+
+        // reset UI
+        scoreText.gameObject.SetActive(true);
+        loseText.gameObject.SetActive(false);
+        winText.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
+
+        gameStarted = true;
     }
 }
