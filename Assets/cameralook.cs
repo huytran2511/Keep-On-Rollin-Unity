@@ -12,13 +12,14 @@ public class cameralook : MonoBehaviour
     void Start()
     {
         //offset = transform.position - player.transform.position;
-        offset = new Vector3(player.position.x, player.position.y + 2.0f, player.position.z - 5.0f);
+        
+        offset = new Vector3(player.position.x, player.position.y + 1.8f, player.position.z - 5.0f);
         //playerPosition = player.transform.position;
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
-        offset = Quaternion.AngleAxis(Input.GetAxis("Horizontal") * 500 * Time.deltaTime, Vector3.up) * offset;
+        offset = Quaternion.AngleAxis(Input.GetAxis("Horizontal") * 300 * Time.deltaTime, Vector3.up) * offset;
         transform.position = player.position + offset;
         transform.LookAt(player.position);
 

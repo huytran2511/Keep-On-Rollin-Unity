@@ -82,6 +82,15 @@ public class PlayerController : MonoBehaviour
             scoreText.gameObject.SetActive(false);
         }
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "SpeedBoost")
+        {
+            speed = 5000;
+            Debug.Log("Speed boost");
+        }   
+    }
     void UpdateScoreText()
     {
         scoreText.text = "Score: " + score;

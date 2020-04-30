@@ -5,6 +5,7 @@ using TMPro;
 using System.Threading;
 using UnityEngine.UI;
 using System;
+using UnityEditor.UIElements;
 
 public class playermovement : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class playermovement : MonoBehaviour
     private GameObject[] gems;
     private Vector3 startPosition;
     private bool gameStarted;
+
+    //private Vector3 movement;
 
     void Start()
     {
@@ -34,14 +37,20 @@ public class playermovement : MonoBehaviour
     {
         if (gameStarted)
         {
-            float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveHorizontal = 0; // = Input.GetAxis("Horizontal");
+            if(player.velocity.magnitude != 0)
+            {
+                moveHorizontal = Input.GetAxis("Horizontal");
+            }
             float moveVertical = Input.GetAxis("Vertical");
 
             //Vector3 movement = transform.right * moveHorizontal + transform.forward * moveVertical;
             //player.transform.Rotate(Vector3.up * moveHorizontal * speed * Time.deltaTime);
             //Vector3 movement = new Vector3(0, 0.0f, moveVertical);
             //Vector3 movement = transform.right * moveHorizontal + transform.forward * moveVertical;
-            Vector3 movement = Camera.main.transform.forward * moveVertical;
+            // Vector3 movement = Camera.main.transform.forward * moveVertical;
+            Vector3 movement = Camera.main.transform.forward * moveVertical + Camera.main.transform.right * moveHorizontal;
+
             player.AddForce(movement * speed * Time.deltaTime);
 
             //rigidbody.AddForce(Camera.main.transform.forward * currentSpeed);
@@ -90,6 +99,26 @@ public class playermovement : MonoBehaviour
             scoreText.gameObject.SetActive(false);
         }
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "SpeedBoost")
+        {
+            player.AddForce(player.velocity.normalized * 500 * Time.deltaTime, ForceMode.Impulse);
+            Debug.Log("Speed boost");
+        }   
+    }
+
+    //void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "SpeedBoost")
+    //    {
+    //        speed = 1000;
+    //        Debug.Log("off boost");
+    //    }
+    //}
+
+
     void UpdateScoreText()
     {
         scoreText.text = "Score: " + score;
