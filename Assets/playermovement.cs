@@ -6,7 +6,7 @@ using System.Threading;
 using UnityEngine.UI;
 using System;
 
-public class PlayerController : MonoBehaviour
+public class playermovement : MonoBehaviour
 {
     public float speed;
     public TMP_Text scoreText;
@@ -37,8 +37,16 @@ public class PlayerController : MonoBehaviour
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
 
-            Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+            //Vector3 movement = transform.right * moveHorizontal + transform.forward * moveVertical;
+            //player.transform.Rotate(Vector3.up * moveHorizontal * speed * Time.deltaTime);
+            //Vector3 movement = new Vector3(0, 0.0f, moveVertical);
+            //Vector3 movement = transform.right * moveHorizontal + transform.forward * moveVertical;
+            Vector3 movement = Camera.main.transform.forward * moveVertical;
             player.AddForce(movement * speed * Time.deltaTime);
+
+            //rigidbody.AddForce(Camera.main.transform.forward * currentSpeed);
+
+
 
             /* test for 1st person view */
 
@@ -62,7 +70,7 @@ public class PlayerController : MonoBehaviour
             collider.gameObject.SetActive(false);
             score++;
             UpdateScoreText();
-        } 
+        }
         else if (collider.gameObject.CompareTag("Win"))
         {
             gameStarted = false;
@@ -90,7 +98,7 @@ public class PlayerController : MonoBehaviour
     void ResetGameState()
     {
         // for each gem, set active flag back to true
-        foreach(GameObject gem in gems)
+        foreach (GameObject gem in gems)
         {
             gem.SetActive(true);
         }
