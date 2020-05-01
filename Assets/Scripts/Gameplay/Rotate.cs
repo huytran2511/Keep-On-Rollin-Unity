@@ -18,11 +18,11 @@ public class Rotate : MonoBehaviour
     {
         if (gameObject.CompareTag("Gem"))
         {
-            this.transform.Rotate(gemRotation * speed * Time.deltaTime);
+            transform.Rotate(gemRotation * speed * Time.deltaTime);
         }
         else if (gameObject.CompareTag("Star"))
         {
-            this.transform.Rotate(starRotation * speed * 2 * Time.deltaTime);
+            transform.Rotate(starRotation * speed * 2 * Time.deltaTime);
         }
     }
 }

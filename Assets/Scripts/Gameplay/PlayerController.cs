@@ -86,7 +86,6 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("SpeedBoost"))
         {
             player.AddForce(player.velocity.normalized * 400.0f * Time.deltaTime, ForceMode.Impulse);
-            Debug.Log("Speed boost");
         }
     }
     void UpdateScoreText()
