@@ -3,34 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class cameralook : MonoBehaviour
-{
-    //public GameObject player;
-    //private Vector3 playerPosition;
-    public Transform player;
+{  
+    public GameObject player;
     private Vector3 offset;
+
+    /****OLD****/
+    //public Transform player;
 
     void Start()
     {
+        offset = new Vector3(player.transform.position.x, player.transform.position.y + 1.8f, player.transform.position.z - 5.0f);
+
+        /****OLD****/
         //offset = transform.position - player.transform.position;
-        
-        offset = new Vector3(player.position.x, player.position.y + 1.8f, player.position.z - 5.0f);
-        //playerPosition = player.transform.position;
     }
 
-    void FixedUpdate()
+    void FixedUpdate() //original was LateUpdate()
     {
         offset = Quaternion.AngleAxis(Input.GetAxis("Horizontal") * 300 * Time.deltaTime, Vector3.up) * offset;
-        transform.position = player.position + offset;
-        transform.LookAt(player.position);
+        transform.position = player.transform.position + offset;
+        transform.LookAt(player.transform.position);
 
-        //transform.LookAt(player.transform);
+        /****OLD****/
         //transform.position = player.transform.position + offset;
-
-        //float moveHorizontal = Input.GetAxis("Horizontal");
-        //playerPosition = player.transform.position;
-        //transform.RotateAround(playerPosition, Vector3.up, moveHorizontal * Time.deltaTime * 500);
-
-        //playerbody.Rotate(Vector3.up * moveHorizontal * Time.deltaTime * 500);
     }
 
     //void FixedUpdate()

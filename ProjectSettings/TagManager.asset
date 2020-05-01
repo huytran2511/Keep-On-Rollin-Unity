@@ -8,6 +8,7 @@ TagManager:
   - GameOver
   - Win
   - SpeedBoost
+  - Star
   layers:
   - Default
   - TransparentFX

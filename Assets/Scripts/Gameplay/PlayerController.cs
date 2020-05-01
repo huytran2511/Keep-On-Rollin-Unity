@@ -8,11 +8,12 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
+    
     public TMP_Text scoreText;
     public TMP_Text loseText, winText;
     public Button restartButton;
 
+    private float speed = 1000.0f;
     private Rigidbody player;
     private int score;
     private GameObject[] gems;
@@ -34,22 +35,19 @@ public class PlayerController : MonoBehaviour
     {
         if (gameStarted)
         {
-            float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
+            //float moveHorizontal = Input.GetAxis("Horizontal");
 
-            Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+            Vector3 movement = Camera.main.transform.forward * moveVertical;
+            //Vector3 movement = Camera.main.transform.forward * moveVertical + Camera.main.transform.right * moveHorizontal;
+
             player.AddForce(movement * speed * Time.deltaTime);
 
-            /* test for 1st person view */
-
+            /***OLD***/
             //float moveHorizontal = Input.GetAxis("Horizontal");
             //float moveVertical = Input.GetAxis("Vertical");
 
-            //Vector3 movement = transform.right * moveHorizontal + transform.forward * moveVertical;
-            //Vector3 movement = transform.forward * moveVertical;
-            //Vector3 movement = new Vector3(0, 0.0f, moveVertical);
-
-            //controller.Move(movement * 10 * Time.deltaTime);
+            //Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
             //player.AddForce(movement * speed * Time.deltaTime);
         }
     }
@@ -85,11 +83,11 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "SpeedBoost")
+        if (collision.gameObject.CompareTag("SpeedBoost"))
         {
-            speed = 5000;
+            player.AddForce(player.velocity.normalized * 400.0f * Time.deltaTime, ForceMode.Impulse);
             Debug.Log("Speed boost");
-        }   
+        }
     }
     void UpdateScoreText()
     {

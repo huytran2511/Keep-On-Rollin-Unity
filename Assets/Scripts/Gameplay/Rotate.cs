@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
-    public float speed;
+    private float speed = 1.0f;
 
-    private Vector3 rotation;
+    private Vector3 gemRotation, starRotation;
     
     void Start()
     {
-        rotation = new Vector3(45, 15, 90);
+        gemRotation = new Vector3(45, 15, 90);
+        starRotation = new Vector3(0, 100, 0);
     }
 
     void Update()
     {
-        this.transform.Rotate(rotation * speed * Time.deltaTime);
+        if (gameObject.CompareTag("Gem"))
+        {
+            this.transform.Rotate(gemRotation * speed * Time.deltaTime);
+        }
+        else if (gameObject.CompareTag("Star"))
+        {
+            this.transform.Rotate(starRotation * speed * 2 * Time.deltaTime);
+        }
     }
 }

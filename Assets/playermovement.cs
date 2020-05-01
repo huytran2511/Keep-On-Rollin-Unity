@@ -20,8 +20,6 @@ public class playermovement : MonoBehaviour
     private Vector3 startPosition;
     private bool gameStarted;
 
-    //private Vector3 movement;
-
     void Start()
     {
         player = GetComponent<Rigidbody>();
@@ -37,36 +35,19 @@ public class playermovement : MonoBehaviour
     {
         if (gameStarted)
         {
-            float moveHorizontal = 0; // = Input.GetAxis("Horizontal");
-            if(player.velocity.magnitude != 0)
-            {
-                moveHorizontal = Input.GetAxis("Horizontal");
-            }
             float moveVertical = Input.GetAxis("Vertical");
-
-            //Vector3 movement = transform.right * moveHorizontal + transform.forward * moveVertical;
-            //player.transform.Rotate(Vector3.up * moveHorizontal * speed * Time.deltaTime);
-            //Vector3 movement = new Vector3(0, 0.0f, moveVertical);
-            //Vector3 movement = transform.right * moveHorizontal + transform.forward * moveVertical;
-            // Vector3 movement = Camera.main.transform.forward * moveVertical;
-            Vector3 movement = Camera.main.transform.forward * moveVertical + Camera.main.transform.right * moveHorizontal;
+            //float moveHorizontal = Input.GetAxis("Horizontal");
+            
+            Vector3 movement = Camera.main.transform.forward * moveVertical;
+            //Vector3 movement = Camera.main.transform.forward * moveVertical + Camera.main.transform.right * moveHorizontal;
 
             player.AddForce(movement * speed * Time.deltaTime);
 
-            //rigidbody.AddForce(Camera.main.transform.forward * currentSpeed);
-
-
-
-            /* test for 1st person view */
-
+            /***OLD***/
             //float moveHorizontal = Input.GetAxis("Horizontal");
             //float moveVertical = Input.GetAxis("Vertical");
 
-            //Vector3 movement = transform.right * moveHorizontal + transform.forward * moveVertical;
-            //Vector3 movement = transform.forward * moveVertical;
-            //Vector3 movement = new Vector3(0, 0.0f, moveVertical);
-
-            //controller.Move(movement * 10 * Time.deltaTime);
+            //Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
             //player.AddForce(movement * speed * Time.deltaTime);
         }
     }
@@ -104,20 +85,10 @@ public class playermovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "SpeedBoost")
         {
-            player.AddForce(player.velocity.normalized * 500 * Time.deltaTime, ForceMode.Impulse);
+            player.AddForce(player.velocity.normalized * 400 * Time.deltaTime, ForceMode.Impulse);
             Debug.Log("Speed boost");
         }   
     }
-
-    //void OnCollisionExit(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "SpeedBoost")
-    //    {
-    //        speed = 1000;
-    //        Debug.Log("off boost");
-    //    }
-    //}
-
 
     void UpdateScoreText()
     {
