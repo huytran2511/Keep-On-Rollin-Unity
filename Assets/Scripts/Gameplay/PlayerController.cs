@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 startPosition;
     private bool gameStarted;
 
+
     void Start()
     {
         player = GetComponent<Rigidbody>();
@@ -105,6 +106,7 @@ public class PlayerController : MonoBehaviour
         player.position = startPosition;
         player.velocity = Vector3.zero;
         player.angularVelocity = Vector3.zero;
+        CameraController.offset = CameraController.originalCameraPos;
     }
 
     void PlayAgain()

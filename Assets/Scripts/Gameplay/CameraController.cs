@@ -5,14 +5,16 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
-    private Vector3 offset;
+    //private Vector3 offset;
+    public static Vector3 offset, originalCameraPos;
 
     /****OLD****/
     //public Transform player;
 
     void Start()
     {
-        offset = new Vector3(player.transform.position.x, player.transform.position.y + 1.8f, player.transform.position.z - 5.0f);
+        originalCameraPos = new Vector3(player.transform.position.x, player.transform.position.y + 1.8f, player.transform.position.z - 5.0f);
+        offset = originalCameraPos;
 
         /****OLD****/
         //offset = transform.position - player.transform.position;
