@@ -10,8 +10,10 @@ public class PlayerController : MonoBehaviour
 {
     
     public TMP_Text scoreText;
-    public TMP_Text loseText, winText;
+    public TMP_Text loseText, winText, timer;
     public Button restartButton;
+
+    private float timeLeft = 10.0f;
 
     private float speed = 1000.0f;
     private Rigidbody player;
@@ -32,6 +34,15 @@ public class PlayerController : MonoBehaviour
         UpdateScoreText();
     }
 
+    void Update()
+    {
+        timeLeft -= Time.deltaTime;
+        timer.text = "Time left: " + timeLeft.ToString("F2");
+        if(timeLeft < 0)
+        {
+            LoseGame();
+        }
+    }
     void FixedUpdate()
     {
         if (gameStarted)
@@ -64,22 +75,32 @@ public class PlayerController : MonoBehaviour
         } 
         else if (collider.gameObject.CompareTag("Win"))
         {
-            gameStarted = false;
-            ResetGameState();
-            winText.text = "You Win!\nFinal score: " + score;
-            winText.gameObject.SetActive(true);
-            restartButton.gameObject.SetActive(true);
-            scoreText.gameObject.SetActive(false);
+            WinGame();
         }
         else if (collider.gameObject.CompareTag("GameOver"))
         {
-            gameStarted = false;
-            ResetGameState();
-            loseText.text = "Game Over!\nFinal score: " + score;
-            loseText.gameObject.SetActive(true);
-            restartButton.gameObject.SetActive(true);
-            scoreText.gameObject.SetActive(false);
+            LoseGame();
         }
+    }
+
+    void WinGame()
+    {
+        gameStarted = false;
+        ResetGameState();
+        winText.text = "You Win!\nFinal score: " + score;
+        winText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+        scoreText.gameObject.SetActive(false);
+    }
+
+    void LoseGame()
+    {
+        gameStarted = false;
+        ResetGameState();
+        loseText.text = "Game Over!\nFinal score: " + score;
+        loseText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+        scoreText.gameObject.SetActive(false);
     }
 
     void OnCollisionEnter(Collision collision)
