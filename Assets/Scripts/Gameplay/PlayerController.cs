@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public TMP_Text loseText, winText, timer;
     public Button restartButton;
 
-    private float timeLeft = 10.0f;
+    private float timeLeft = 30.0f;
 
     private float speed = 1000.0f;
     private Rigidbody player;
@@ -62,6 +62,10 @@ public class PlayerController : MonoBehaviour
             //Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
             //player.AddForce(movement * speed * Time.deltaTime);
         }
+        if (score == 5)
+        {
+            WinGame();
+        }
     }
 
     void OnTriggerEnter(Collider collider)
@@ -91,6 +95,7 @@ public class PlayerController : MonoBehaviour
         winText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
         scoreText.gameObject.SetActive(false);
+        Time.timeScale = 0f;
     }
 
     void LoseGame()
@@ -101,6 +106,7 @@ public class PlayerController : MonoBehaviour
         loseText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
         scoreText.gameObject.SetActive(false);
+        Time.timeScale = 0f;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -112,7 +118,7 @@ public class PlayerController : MonoBehaviour
     }
     void UpdateScoreText()
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Score: " + score + "/5";
     }
 
     void ResetGameState()
@@ -132,6 +138,8 @@ public class PlayerController : MonoBehaviour
 
     void PlayAgain()
     {
+        Time.timeScale = 1f;
+        timeLeft = 30.0f;
         // reset score
         score = 0;
         UpdateScoreText();
