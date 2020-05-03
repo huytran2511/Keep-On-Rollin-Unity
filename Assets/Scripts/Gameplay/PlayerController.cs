@@ -12,9 +12,12 @@ public class PlayerController : MonoBehaviour
     public TMP_Text gemText, starText;
     public TMP_Text loseText, winText, timer;
     public Button restartButton;
+    public float startTime;
+    
+    public AudioSource[] sounds;
+    public AudioSource gemSound, starSound, splashSound, winSound;
 
-    public float timeLeft;
-
+    private float timeLeft;
     private float speed = 1000.0f;
     private Rigidbody player;
     private int gemScore, starScore;
@@ -26,6 +29,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player = GetComponent<Rigidbody>();
+        sounds = GetComponents<AudioSource>();
+        gemSound = sounds[0];
+        starSound = sounds[1];
+        splashSound = sounds[2];
+        winSound = sounds[3];
+
+        timeLeft = startTime;
+
         gems = GameObject.FindGameObjectsWithTag("Gem");
         stars = GameObject.FindGameObjectsWithTag("Star");
         startPosition = player.position;
@@ -79,23 +90,27 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.CompareTag("Gem"))
         {
             collider.gameObject.SetActive(false);
+            gemSound.Play();
             gemScore++;
             UpdateScoreText();
         }
         if (collider.gameObject.CompareTag("Star"))
         {
             collider.gameObject.SetActive(false);
+            starSound.Play();
             starScore++;
             UpdateScoreText();
         }
         if (collider.gameObject.CompareTag("GameOver"))
         {
+            splashSound.Play();
             LoseGame();
         }
     }
 
     void WinGame()
     {
+        winSound.Play();
         gameStarted = false;
         ResetGameState();
         winText.text = "YOU WIN!!!\nStars: " + starScore + "/3";
@@ -155,7 +170,7 @@ public class PlayerController : MonoBehaviour
     void PlayAgain()
     {
         Time.timeScale = 1f;
-        timeLeft = 30.0f;
+        timeLeft = startTime;
         // reset score
         gemScore = 0;
         starScore = 0;

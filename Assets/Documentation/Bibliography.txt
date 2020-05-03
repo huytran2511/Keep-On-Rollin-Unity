@@ -24,21 +24,19 @@ LiberationSans SDF - TextMesh Pro
 ==== MUSIC ====
 
 
-********OLD**********
-Background Music: Up In The Sky - You're Perfect Studio - https://opengameart.org/content/up-in-the-sky
+Beach Town Guitar Theme - Hitctrl - https://opengameart.org/content/beach-town-guitar-theme
 
 
 ==== SOUND EFFECTS ====
 
 
-********OLD**********
-Jumping: Damaged Panda - https://opengameart.org/content/100-plus-game-sound-effects-wavoggm4a
-
-Landing: MentalSanityOff - https://opengameart.org/content/jump-landing-sound
-
-Game Over: den_yes - https://opengameart.org/content/game-over-soundold-school
-
 Winning: spuispuin - https://opengameart.org/content/won-orchestral-winning-jingle
+
+Water Splashes: Michel Baradari - https://opengameart.org/content/water-splashes
+
+Star: wobbleboxx - https://opengameart.org/content/level-up-power-up-coin-get-13-sounds
+
+Gem: Brandon Morris - https://opengameart.org/content/completion-sound
 
 
 ==== TUTORIAL & CODE REFERENCES ====
