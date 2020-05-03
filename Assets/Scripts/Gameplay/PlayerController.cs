@@ -9,16 +9,16 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     
-    public TMP_Text scoreText;
+    public TMP_Text gemText, starText;
     public TMP_Text loseText, winText, timer;
     public Button restartButton;
 
-    private float timeLeft = 30.0f;
+    public float timeLeft;
 
     private float speed = 1000.0f;
     private Rigidbody player;
-    private int score;
-    private GameObject[] gems;
+    private int gemScore, starScore;
+    private GameObject[] gems, stars;
     private Vector3 startPosition;
     private bool gameStarted;
 
@@ -27,17 +27,19 @@ public class PlayerController : MonoBehaviour
     {
         player = GetComponent<Rigidbody>();
         gems = GameObject.FindGameObjectsWithTag("Gem");
+        stars = GameObject.FindGameObjectsWithTag("Star");
         startPosition = player.position;
         restartButton.onClick.AddListener(PlayAgain);
         gameStarted = true;
-        score = 0;
+        gemScore = 0;
+        starScore = 0;
         UpdateScoreText();
     }
 
     void Update()
     {
         timeLeft -= Time.deltaTime;
-        timer.text = "Time left: " + timeLeft.ToString("F2");
+        timer.text = "TIME\n" + timeLeft.ToString("F2");
         if(timeLeft < 0)
         {
             LoseGame();
@@ -62,10 +64,13 @@ public class PlayerController : MonoBehaviour
             //Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
             //player.AddForce(movement * speed * Time.deltaTime);
         }
-        if (score == 5)
+        if (gemScore == 10)
         {
             WinGame();
         }
+
+        //need condition for when collect all stars
+        
     }
 
     void OnTriggerEnter(Collider collider)
@@ -74,14 +79,16 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.CompareTag("Gem"))
         {
             collider.gameObject.SetActive(false);
-            score++;
+            gemScore++;
             UpdateScoreText();
-        } 
-        else if (collider.gameObject.CompareTag("Win"))
-        {
-            WinGame();
         }
-        else if (collider.gameObject.CompareTag("GameOver"))
+        if (collider.gameObject.CompareTag("Star"))
+        {
+            collider.gameObject.SetActive(false);
+            starScore++;
+            UpdateScoreText();
+        }
+        if (collider.gameObject.CompareTag("GameOver"))
         {
             LoseGame();
         }
@@ -91,10 +98,12 @@ public class PlayerController : MonoBehaviour
     {
         gameStarted = false;
         ResetGameState();
-        winText.text = "You Win!\nFinal score: " + score;
+        winText.text = "YOU WIN!!!\nStars: " + starScore + "/3";
         winText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
-        scoreText.gameObject.SetActive(false);
+        gemText.gameObject.SetActive(false);
+        starText.gameObject.SetActive(false);
+        timer.gameObject.SetActive(false);
         Time.timeScale = 0f;
     }
 
@@ -102,10 +111,12 @@ public class PlayerController : MonoBehaviour
     {
         gameStarted = false;
         ResetGameState();
-        loseText.text = "Game Over!\nFinal score: " + score;
+        loseText.text = "GAME OVER";
         loseText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
-        scoreText.gameObject.SetActive(false);
+        gemText.gameObject.SetActive(false);
+        starText.gameObject.SetActive(false);
+        timer.gameObject.SetActive(false);
         Time.timeScale = 0f;
     }
 
@@ -118,15 +129,20 @@ public class PlayerController : MonoBehaviour
     }
     void UpdateScoreText()
     {
-        scoreText.text = "Score: " + score + "/5";
+        gemText.text = "Gems: " + gemScore + "/10";
+        starText.text = "Stars " + starScore + "/3";
     }
 
     void ResetGameState()
     {
-        // for each gem, set active flag back to true
+        // for each gem and star, set active flag back to true
         foreach(GameObject gem in gems)
         {
             gem.SetActive(true);
+        }
+        foreach (GameObject star in stars)
+        {
+            star.SetActive(true);
         }
 
         // set player position and velocity to start
@@ -141,11 +157,15 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1f;
         timeLeft = 30.0f;
         // reset score
-        score = 0;
+        gemScore = 0;
+        starScore = 0;
+        timeLeft = 30.0f;
         UpdateScoreText();
 
         // reset UI
-        scoreText.gameObject.SetActive(true);
+        gemText.gameObject.SetActive(true);
+        starText.gameObject.SetActive(true);
+        timer.gameObject.SetActive(true);
         loseText.gameObject.SetActive(false);
         winText.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);

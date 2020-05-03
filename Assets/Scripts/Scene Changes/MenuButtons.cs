@@ -7,7 +7,7 @@ public class MenuButtons : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("Gameplay");
+        SceneManager.LoadScene("Lv1");
     }
     public void Credits()
     {
