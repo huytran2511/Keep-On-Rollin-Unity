@@ -9,13 +9,15 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     
-    public TMP_Text gemText, starText;
-    public TMP_Text loseText, winText, timer;
-    public Button restartButton;
+    public TMP_Text gemText, starText, winText, timer;
+    //public Button restartButton;
+
+    public GameObject gameOverUI, winUI, HUD;
+
     public float startTime;
     
     public AudioSource[] sounds;
-    public AudioSource gemSound, starSound, splashSound, winSound;
+    private AudioSource gemSound, starSound, splashSound, winSound;
 
     private float timeLeft;
     private float speed = 1000.0f;
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour
         gems = GameObject.FindGameObjectsWithTag("Gem");
         stars = GameObject.FindGameObjectsWithTag("Star");
         startPosition = player.position;
-        restartButton.onClick.AddListener(PlayAgain);
+        //restartButton.onClick.AddListener(PlayAgain);
         gameStarted = true;
         gemScore = 0;
         starScore = 0;
@@ -75,7 +77,7 @@ public class PlayerController : MonoBehaviour
             //Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
             //player.AddForce(movement * speed * Time.deltaTime);
         }
-        if (gemScore == 10)
+        if (gemScore == 1)
         {
             WinGame();
         }
@@ -103,7 +105,6 @@ public class PlayerController : MonoBehaviour
         }
         if (collider.gameObject.CompareTag("GameOver"))
         {
-            splashSound.Play();
             LoseGame();
         }
     }
@@ -112,26 +113,36 @@ public class PlayerController : MonoBehaviour
     {
         winSound.Play();
         gameStarted = false;
-        ResetGameState();
+        //ResetGameState();
+        
         winText.text = "YOU WIN!!!\nStars: " + starScore + "/3";
-        winText.gameObject.SetActive(true);
-        restartButton.gameObject.SetActive(true);
-        gemText.gameObject.SetActive(false);
-        starText.gameObject.SetActive(false);
-        timer.gameObject.SetActive(false);
+        //winText.gameObject.SetActive(true);
+        //restartButton.gameObject.SetActive(true);
+        winUI.SetActive(true);
+
+        //gemText.gameObject.SetActive(false);
+        //starText.gameObject.SetActive(false);
+        //timer.gameObject.SetActive(false);
+        HUD.SetActive(false);
         Time.timeScale = 0f;
     }
 
     void LoseGame()
     {
+        splashSound.Play();
         gameStarted = false;
-        ResetGameState();
-        loseText.text = "GAME OVER";
-        loseText.gameObject.SetActive(true);
-        restartButton.gameObject.SetActive(true);
-        gemText.gameObject.SetActive(false);
-        starText.gameObject.SetActive(false);
-        timer.gameObject.SetActive(false);
+        //ResetGameState();
+
+        //loseText.text = "GAME OVER";
+        //loseText.gameObject.SetActive(true);
+        //restartButton.gameObject.SetActive(true);
+        gameOverUI.SetActive(true);
+
+
+        //gemText.gameObject.SetActive(false);
+        //starText.gameObject.SetActive(false);
+        //timer.gameObject.SetActive(false);
+        HUD.SetActive(false);
         Time.timeScale = 0f;
     }
 
@@ -167,23 +178,29 @@ public class PlayerController : MonoBehaviour
         CameraController.offset = CameraController.originalCameraPos;
     }
 
-    void PlayAgain()
+    public void PlayAgain()
     {
         Time.timeScale = 1f;
         timeLeft = startTime;
         // reset score
         gemScore = 0;
         starScore = 0;
-        timeLeft = 30.0f;
         UpdateScoreText();
 
+        ResetGameState();
+
         // reset UI
-        gemText.gameObject.SetActive(true);
-        starText.gameObject.SetActive(true);
-        timer.gameObject.SetActive(true);
-        loseText.gameObject.SetActive(false);
-        winText.gameObject.SetActive(false);
-        restartButton.gameObject.SetActive(false);
+        //gemText.gameObject.SetActive(true);
+        //starText.gameObject.SetActive(true);
+        //timer.gameObject.SetActive(true);
+        HUD.SetActive(true);
+
+        //loseText.gameObject.SetActive(false);
+        //restartButton.gameObject.SetActive(false);
+        gameOverUI.SetActive(false);
+        //winText.gameObject.SetActive(false);
+        winUI.SetActive(false);
+        
 
         gameStarted = true;
     }
