@@ -9,9 +9,14 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     
-    public TMP_Text gemText, starText, winText, timer;
+    public TMP_Text gemText, winText, timer;
 
     public GameObject gameOverUI, winUI, HUD;
+    public GameObject starEmpty1, starEmpty2, starEmpty3;
+    public GameObject starFull1, starFull2, starFull3;
+
+    public GameObject starEmptyWin1, starEmptyWin2, starEmptyWin3;
+    public GameObject starFullWin1, starFullWin2, starFullWin3;
 
     public float startTime;
     
@@ -55,6 +60,8 @@ public class PlayerController : MonoBehaviour
         {
             LoseGame();
         }
+
+
     }
     void FixedUpdate()
     {
@@ -74,14 +81,13 @@ public class PlayerController : MonoBehaviour
 
             //Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
             //player.AddForce(movement * speed * Time.deltaTime);
-        }
-        if (gemScore == 1)
-        {
-            WinGame();
-        }
 
-        //need condition for when collect all stars
-        
+            if (gemScore == 2)
+            {
+                WinGame();
+            }
+            DisplayStar();
+        }
     }
 
     void OnTriggerEnter(Collider collider)
@@ -112,15 +118,8 @@ public class PlayerController : MonoBehaviour
         winSound.Play();
         gameStarted = false;
         //ResetGameState();
-        
-        winText.text = "YOU WIN!!!\nStars: " + starScore + "/3";
-        //winText.gameObject.SetActive(true);
-        //restartButton.gameObject.SetActive(true);
         winUI.SetActive(true);
 
-        //gemText.gameObject.SetActive(false);
-        //starText.gameObject.SetActive(false);
-        //timer.gameObject.SetActive(false);
         HUD.SetActive(false);
         Time.timeScale = 0f;
     }
@@ -131,15 +130,8 @@ public class PlayerController : MonoBehaviour
         gameStarted = false;
         //ResetGameState();
 
-        //loseText.text = "GAME OVER";
-        //loseText.gameObject.SetActive(true);
-        //restartButton.gameObject.SetActive(true);
         gameOverUI.SetActive(true);
 
-
-        //gemText.gameObject.SetActive(false);
-        //starText.gameObject.SetActive(false);
-        //timer.gameObject.SetActive(false);
         HUD.SetActive(false);
         Time.timeScale = 0f;
     }
@@ -153,8 +145,7 @@ public class PlayerController : MonoBehaviour
     }
     void UpdateScoreText()
     {
-        gemText.text = "Gems: " + gemScore + "/10";
-        starText.text = "Stars " + starScore + "/3";
+        gemText.text = gemScore + "/10";
     }
 
     void ResetGameState()
@@ -178,14 +169,14 @@ public class PlayerController : MonoBehaviour
 
     public void PlayAgain()
     {
-        ResetGameState();
-        UpdateScoreText();
-
         Time.timeScale = 1f;
+        ResetGameState();      
         timeLeft = startTime;
+
         // reset score
         gemScore = 0;
         starScore = 0;
+        UpdateScoreText();
 
         // reset UI
         HUD.SetActive(true);
@@ -193,5 +184,73 @@ public class PlayerController : MonoBehaviour
         winUI.SetActive(false);
 
         gameStarted = true;
+    }
+
+    void DisplayStar()
+    {
+        if (starScore == 0)
+        {
+            starEmpty1.SetActive(true);
+            starEmpty2.SetActive(true);
+            starEmpty3.SetActive(true);
+            starFull1.SetActive(false);
+            starFull2.SetActive(false);
+            starFull3.SetActive(false);
+
+            starEmptyWin1.SetActive(true);
+            starEmptyWin2.SetActive(true);
+            starEmptyWin3.SetActive(true);
+            starFullWin1.SetActive(false);
+            starFullWin2.SetActive(false);
+            starFullWin3.SetActive(false);
+        }
+        if (starScore == 1)
+        {
+            starEmpty1.SetActive(false);
+            starEmpty2.SetActive(true);
+            starEmpty3.SetActive(true);
+            starFull1.SetActive(true);
+            starFull2.SetActive(false);
+            starFull3.SetActive(false);
+
+            starEmptyWin1.SetActive(false);
+            starEmptyWin2.SetActive(true);
+            starEmptyWin3.SetActive(true);
+            starFullWin1.SetActive(true);
+            starFullWin2.SetActive(false);
+            starFullWin3.SetActive(false);
+        }
+        if (starScore == 2)
+        {
+            starEmpty1.SetActive(false);
+            starEmpty2.SetActive(false);
+            starEmpty3.SetActive(true);
+            starFull1.SetActive(true);
+            starFull2.SetActive(true);
+            starFull3.SetActive(false);
+
+            starEmptyWin1.SetActive(false);
+            starEmptyWin2.SetActive(false);
+            starEmptyWin3.SetActive(true);
+            starFullWin1.SetActive(true);
+            starFullWin2.SetActive(true);
+            starFullWin3.SetActive(false);
+        }
+        if (starScore == 3)
+        {
+            starEmpty1.SetActive(false);
+            starEmpty2.SetActive(false);
+            starEmpty3.SetActive(false);
+            starFull1.SetActive(true);
+            starFull2.SetActive(true);
+            starFull3.SetActive(true);
+
+            starEmptyWin1.SetActive(false);
+            starEmptyWin2.SetActive(false);
+            starEmptyWin3.SetActive(false);
+            starFullWin1.SetActive(true);
+            starFullWin2.SetActive(true);
+            starFullWin3.SetActive(true);
+        }
     }
 }
