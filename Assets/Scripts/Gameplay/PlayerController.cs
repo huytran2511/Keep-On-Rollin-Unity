@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
 {
     
     public TMP_Text gemText, starText, winText, timer;
-    //public Button restartButton;
 
     public GameObject gameOverUI, winUI, HUD;
 
@@ -24,13 +23,15 @@ public class PlayerController : MonoBehaviour
     private Rigidbody player;
     private int gemScore, starScore;
     private GameObject[] gems, stars;
-    private Vector3 startPosition;
+    private Vector3 startPos;
     private bool gameStarted;
-
 
     void Start()
     {
+        gameStarted = true;
         player = GetComponent<Rigidbody>();
+        startPos = player.position;
+
         sounds = GetComponents<AudioSource>();
         gemSound = sounds[0];
         starSound = sounds[1];
@@ -41,9 +42,6 @@ public class PlayerController : MonoBehaviour
 
         gems = GameObject.FindGameObjectsWithTag("Gem");
         stars = GameObject.FindGameObjectsWithTag("Star");
-        startPosition = player.position;
-        //restartButton.onClick.AddListener(PlayAgain);
-        gameStarted = true;
         gemScore = 0;
         starScore = 0;
         UpdateScoreText();
@@ -161,8 +159,14 @@ public class PlayerController : MonoBehaviour
 
     void ResetGameState()
     {
+        // set player position and velocity to start
+        player.position = startPos;
+        player.velocity = Vector3.zero;
+        player.angularVelocity = Vector3.zero;
+        CameraController.offset = CameraController.originalCameraPos;
+
         // for each gem and star, set active flag back to true
-        foreach(GameObject gem in gems)
+        foreach (GameObject gem in gems)
         {
             gem.SetActive(true);
         }
@@ -170,37 +174,23 @@ public class PlayerController : MonoBehaviour
         {
             star.SetActive(true);
         }
-
-        // set player position and velocity to start
-        player.position = startPosition;
-        player.velocity = Vector3.zero;
-        player.angularVelocity = Vector3.zero;
-        CameraController.offset = CameraController.originalCameraPos;
     }
 
     public void PlayAgain()
     {
+        ResetGameState();
+        UpdateScoreText();
+
         Time.timeScale = 1f;
         timeLeft = startTime;
         // reset score
         gemScore = 0;
         starScore = 0;
-        UpdateScoreText();
-
-        ResetGameState();
 
         // reset UI
-        //gemText.gameObject.SetActive(true);
-        //starText.gameObject.SetActive(true);
-        //timer.gameObject.SetActive(true);
         HUD.SetActive(true);
-
-        //loseText.gameObject.SetActive(false);
-        //restartButton.gameObject.SetActive(false);
         gameOverUI.SetActive(false);
-        //winText.gameObject.SetActive(false);
         winUI.SetActive(false);
-        
 
         gameStarted = true;
     }
