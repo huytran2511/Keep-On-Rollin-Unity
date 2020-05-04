@@ -13,7 +13,8 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        originalCameraPos = new Vector3(player.transform.position.x, player.transform.position.y + 1.8f, player.transform.position.z - 5.0f);
+        //originalCameraPos = new Vector3(player.transform.position.x, player.transform.position.y + 1.8f, player.transform.position.z - 5.0f);
+        originalCameraPos = new Vector3(player.transform.position.x, player.transform.position.y + 0.8f, player.transform.position.z - 5.0f);
         offset = originalCameraPos;
 
         /****OLD****/

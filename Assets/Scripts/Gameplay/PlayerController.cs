@@ -5,6 +5,7 @@ using TMPro;
 using System.Threading;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -113,7 +114,7 @@ public class PlayerController : MonoBehaviour
                 startCountdown.text = "GO!";
                 gameStarted = true;
             }
-            Debug.Log(count);
+            //Debug.Log(count);
             yield return new WaitForSeconds(1);
             count--;
         }
@@ -199,21 +200,24 @@ public class PlayerController : MonoBehaviour
 
     public void PlayAgain()
     {
+        //Time.timeScale = 1f;
+        //ResetGameState();      
+        //timeLeft = startTime;
+
+        //// reset score
+        //gemScore = 0;
+        //starScore = 0;
+        //UpdateScoreText();
+
+        //// reset UI
+        //HUD.SetActive(true);
+        //gameOverUI.SetActive(false);
+        //winUI.SetActive(false);
+
+        //gameStarted = true;
+        
         Time.timeScale = 1f;
-        ResetGameState();      
-        timeLeft = startTime;
-
-        // reset score
-        gemScore = 0;
-        starScore = 0;
-        UpdateScoreText();
-
-        // reset UI
-        HUD.SetActive(true);
-        gameOverUI.SetActive(false);
-        winUI.SetActive(false);
-
-        gameStarted = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void DisplayStar()
