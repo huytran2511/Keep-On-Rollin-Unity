@@ -22,12 +22,16 @@ public class CameraController : MonoBehaviour
 
     void FixedUpdate() //original was LateUpdate()
     {
-        offset = Quaternion.AngleAxis(Input.GetAxis("Horizontal") * 300.0f * Time.deltaTime, Vector3.up) * offset;
-        transform.position = player.transform.position + offset;
-        transform.LookAt(player.transform.position);
+        if (PlayerController.gameStarted)
+        {
+            offset = Quaternion.AngleAxis(Input.GetAxis("Horizontal") * 300.0f * Time.deltaTime, Vector3.up) * offset;
+            transform.position = player.transform.position + offset;
+            transform.LookAt(player.transform.position);
 
-        /****OLD****/
-        //transform.position = player.transform.position + offset;
+            /****OLD****/
+            //transform.position = player.transform.position + offset;
+        }
+
     }
 
     //void FixedUpdate()

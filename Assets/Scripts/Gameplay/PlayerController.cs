@@ -9,7 +9,7 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     
-    public TMP_Text gemText, winText, timer;
+    public TMP_Text gemText, winText, timer, startCountdown;
 
     public GameObject gameOverUI, winUI, HUD;
     public GameObject starEmpty1, starEmpty2, starEmpty3;
@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour
     public GameObject starFullWin1, starFullWin2, starFullWin3;
 
     public float startTime;
-    
+    public static bool gameStarted;
+
     public AudioSource[] sounds;
     private AudioSource gemSound, starSound, splashSound, winSound;
 
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
     private int gemScore, starScore;
     private GameObject[] gems, stars;
     private Vector3 startPos;
-    private bool gameStarted;
+    //private bool gameStarted;
 
     void Start()
     {
@@ -43,26 +44,34 @@ public class PlayerController : MonoBehaviour
         splashSound = sounds[2];
         winSound = sounds[3];
 
-        timeLeft = startTime;
+        timeLeft = startTime + 5;
+        timer.text = "TIME\n" + startTime.ToString("F2");
+        gameStarted = false;
 
         gems = GameObject.FindGameObjectsWithTag("Gem");
         stars = GameObject.FindGameObjectsWithTag("Star");
         gemScore = 0;
         starScore = 0;
         UpdateScoreText();
+
+        StartCoroutine(Countdown(6));
     }
+
+
 
     void Update()
     {
         timeLeft -= Time.deltaTime;
-        timer.text = "TIME\n" + timeLeft.ToString("F2");
+        if(timeLeft <= startTime)
+        {
+            timer.text = "TIME\n" + timeLeft.ToString("F2");
+        }
         if(timeLeft < 0)
         {
             LoseGame();
         }
-
-
     }
+
     void FixedUpdate()
     {
         if (gameStarted)
@@ -88,6 +97,27 @@ public class PlayerController : MonoBehaviour
             }
             DisplayStar();
         }
+    }
+
+    IEnumerator Countdown(int seconds)
+    {
+        int count = seconds;
+        while (count > 0)
+        {
+            if (count < 5 && count > 1)
+            {
+                startCountdown.text = (count - 1).ToString();
+            }
+            if(count == 1)
+            {
+                startCountdown.text = "GO!";
+                gameStarted = true;
+            }
+            Debug.Log(count);
+            yield return new WaitForSeconds(1);
+            count--;
+        }
+        startCountdown.gameObject.SetActive(false);
     }
 
     void OnTriggerEnter(Collider collider)
