@@ -7,44 +7,38 @@ using TMPro;
 public class PauseMenu : MonoBehaviour
 {
     public static bool gamePaused = false;
-    private TMP_Text highscore_PMText;
-    public GameObject pauseMenuUI;
+    public GameObject pauseUI;
 
-    void Awake()
-    {
-        highscore_PMText = GameObject.Find("HighScore_PM").GetComponent<TMP_Text>();
-        pauseMenuUI.SetActive(false);
-    }
+    //void Awake()
+    //{
+    //    pauseUI.SetActive(false);
+    //}
 
     void Update()
     {
-        //if (!PlatformCollector.gameOver && !Player.finish)
-        //{
-            if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        {
+            if (gamePaused)
             {
-                if (gamePaused)
-                {
-                    Resume();
-                }
-                else
-                {
-                    Pause();
-                }
+                Resume();
             }
-        //}
-        //highscore_PMText.text = "High Score: " + Player.highscore.ToString();
+            else
+            {
+                Pause();
+            }
+        }
     }
 
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
+        pauseUI.SetActive(false);
         Time.timeScale = 1f;
         gamePaused = false;
     }
 
     void Pause()
     {
-        pauseMenuUI.SetActive(true);
+        pauseUI.SetActive(true);
         Time.timeScale = 0f;
         gamePaused = true;
     }
@@ -53,15 +47,12 @@ public class PauseMenu : MonoBehaviour
     {
         gamePaused = false;
         Time.timeScale = 1f;
-        //Player.score = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void GoHome()
     {
         gamePaused = false;
-        Time.timeScale = 1f;
-        //Player.score = 0;
         SceneManager.LoadScene("MainMenu");
     }
 
