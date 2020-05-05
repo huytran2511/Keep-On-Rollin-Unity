@@ -15,7 +15,7 @@ public class Respawn : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Invoke("RespawnPlayer", 1f);
+        Invoke("RespawnPlayer", 2f);
         //RespawnPlayer();
 
 
@@ -24,7 +24,7 @@ public class Respawn : MonoBehaviour
     void RespawnPlayer()
     {
         player.transform.position = respawnPoint.transform.position;
-        player.velocity = Vector3.zero;
-        player.angularVelocity = Vector3.zero;
+        //player.velocity = Vector3.zero;
+        //player.angularVelocity = Vector3.zero;
     }
 }
