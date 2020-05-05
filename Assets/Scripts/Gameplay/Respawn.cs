@@ -24,6 +24,7 @@ public class Respawn : MonoBehaviour
     void RespawnPlayer()
     {
         player.transform.position = respawnPoint.transform.position;
+        PlayerController.gameStarted = true;
         //player.velocity = Vector3.zero;
         //player.angularVelocity = Vector3.zero;
     }

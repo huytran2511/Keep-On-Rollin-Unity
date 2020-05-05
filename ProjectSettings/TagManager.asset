@@ -5,10 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Gem
-  - GameOver
   - Win
   - SpeedBoost
   - Star
+  - Sea
   layers:
   - Default
   - TransparentFX

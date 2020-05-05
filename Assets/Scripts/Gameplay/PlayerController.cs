@@ -87,13 +87,13 @@ public class PlayerController : MonoBehaviour
             player.angularDrag = 1f;
             player.AddForce(movement * speed * Time.deltaTime);
             player.velocity = Quaternion.Euler(0f, moveHorizontal * rotateVelocity * Time.deltaTime, 0f) * player.velocity;
-
-            if (gemScore == 5)
-            {
-                WinGame();
-            }
-            DisplayStar();
         }
+        
+        if (gemScore == 5)
+        {
+            WinGame();
+        }
+        DisplayStar();
     }
 
     IEnumerator Countdown(int seconds)
@@ -136,14 +136,10 @@ public class PlayerController : MonoBehaviour
             starScore++;
             UpdateScoreText();
         }
-        //if (collider.gameObject.CompareTag("GameOver"))
-        //{
-        //    LoseGame();
-        //}
-        //if (collider.gameObject.CompareTag("Respawn"))
-        //{
-        //    splashSound.Play();
-        //}
+        if (collider.gameObject.CompareTag("Sea"))
+        {
+            splashSound.Play();
+        }
     }
 
     void WinGame()
@@ -179,7 +175,8 @@ public class PlayerController : MonoBehaviour
         {
             player.velocity = Vector3.zero;
             player.angularVelocity = Vector3.zero;
-            splashSound.Play();
+            gameStarted = false;
+            //splashSound.Play();
         }
     }
     void UpdateScoreText()
