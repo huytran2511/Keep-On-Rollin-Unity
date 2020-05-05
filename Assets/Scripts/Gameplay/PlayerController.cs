@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public GameObject starEmptyWin1, starEmptyWin2, starEmptyWin3;
     public GameObject starFullWin1, starFullWin2, starFullWin3;
 
+    public float speed;
     public float startTime;
     public static bool gameStarted;
 
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource gemSound, starSound, splashSound, winSound, count1, count2, count3, countGo;
 
     private float timeLeft;
-    private float speed = 1000.0f;
+    
     private Rigidbody player;
     private int gemScore, starScore;
     private GameObject[] gems, stars;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f;
         gameStarted = true;
         player = GetComponent<Rigidbody>();
         startPos = player.position;
@@ -78,13 +80,14 @@ public class PlayerController : MonoBehaviour
         if (gameStarted)
         {
             float moveVertical = Input.GetAxis("Vertical");
-            //float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveHorizontal = Input.GetAxis("Horizontal");
 
             Vector3 movement = Camera.main.transform.forward * moveVertical;
             //Vector3 movement = Camera.main.transform.forward * moveVertical + Camera.main.transform.right * moveHorizontal;
 
             player.AddForce(movement * speed * Time.deltaTime);
-            //player.velocity. = Camera.main.transform.forward;
+            //player.velocity = Camera.main.transform.forward.normalized * player.velocity.magnitude;
+
 
             /***OLD***/
             //float moveHorizontal = Input.GetAxis("Horizontal");
@@ -141,10 +144,14 @@ public class PlayerController : MonoBehaviour
             starScore++;
             UpdateScoreText();
         }
-        if (collider.gameObject.CompareTag("GameOver"))
-        {
-            LoseGame();
-        }
+        //if (collider.gameObject.CompareTag("GameOver"))
+        //{
+        //    LoseGame();
+        //}
+        //if (collider.gameObject.CompareTag("Respawn"))
+        //{
+        //    splashSound.Play();
+        //}
     }
 
     void WinGame()
@@ -160,7 +167,7 @@ public class PlayerController : MonoBehaviour
 
     void LoseGame()
     {
-        splashSound.Play();
+        //splashSound.Play();
         gameStarted = false;
         //ResetGameState();
 
@@ -175,6 +182,12 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("SpeedBoost"))
         {
             player.AddForce(player.velocity.normalized * 400.0f * Time.deltaTime, ForceMode.Impulse);
+        }
+        if (collision.gameObject.CompareTag("Respawn"))
+        {
+            player.velocity = Vector3.zero;
+            player.angularVelocity = Vector3.zero;
+            splashSound.Play();
         }
     }
     void UpdateScoreText()
@@ -219,7 +232,6 @@ public class PlayerController : MonoBehaviour
 
         //gameStarted = true;
         
-        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

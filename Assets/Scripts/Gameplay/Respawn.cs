@@ -7,11 +7,18 @@ public class Respawn : MonoBehaviour
     [SerializeField] private Rigidbody player;
     [SerializeField] private Transform respawnPoint;
     
-    private void OnTriggerEnter(Collider other)
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    Invoke("RespawnPlayer", 1f);
+    //    //RespawnPlayer();        
+    //}
+
+    void OnCollisionEnter(Collision collision)
     {
         Invoke("RespawnPlayer", 1f);
-        
-        
+        //RespawnPlayer();
+
+
     }
 
     void RespawnPlayer()
