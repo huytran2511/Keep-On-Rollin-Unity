@@ -81,22 +81,14 @@ public class PlayerController : MonoBehaviour
         {
             float moveVertical = Input.GetAxis("Vertical");
             float moveHorizontal = Input.GetAxis("Horizontal");
-
+            float rotateVelocity = 410f;
             Vector3 movement = Camera.main.transform.forward * moveVertical;
-            //Vector3 movement = Camera.main.transform.forward * moveVertical + Camera.main.transform.right * moveHorizontal;
 
+            player.angularDrag = 1f;
             player.AddForce(movement * speed * Time.deltaTime);
-            //player.velocity = Camera.main.transform.forward.normalized * player.velocity.magnitude;
+            player.velocity = Quaternion.Euler(0f, moveHorizontal * rotateVelocity * Time.deltaTime, 0f) * player.velocity;
 
-
-            /***OLD***/
-            //float moveHorizontal = Input.GetAxis("Horizontal");
-            //float moveVertical = Input.GetAxis("Vertical");
-
-            //Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-            //player.AddForce(movement * speed * Time.deltaTime);
-
-            if (gemScore == 2)
+            if (gemScore == 5)
             {
                 WinGame();
             }
