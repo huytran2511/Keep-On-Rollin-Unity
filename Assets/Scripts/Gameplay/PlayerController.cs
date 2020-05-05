@@ -44,10 +44,6 @@ public class PlayerController : MonoBehaviour
         starSound = sounds[1];
         splashSound = sounds[2];
         winSound = sounds[3];
-        //count1 = sounds[4];
-        //count2 = sounds[5];
-        //count3 = sounds[6];
-        //countGo = sounds[7];
 
         timeLeft = startTime + 5;
         timer.text = "TIME\n" + startTime.ToString("F2");
@@ -88,6 +84,7 @@ public class PlayerController : MonoBehaviour
             //Vector3 movement = Camera.main.transform.forward * moveVertical + Camera.main.transform.right * moveHorizontal;
 
             player.AddForce(movement * speed * Time.deltaTime);
+            //player.velocity. = Camera.main.transform.forward;
 
             /***OLD***/
             //float moveHorizontal = Input.GetAxis("Horizontal");
