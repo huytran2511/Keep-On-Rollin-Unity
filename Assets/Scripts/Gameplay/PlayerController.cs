@@ -13,13 +13,13 @@ public class PlayerController : MonoBehaviour
     public TMP_Text gemText, winText, timer, startCountdown;
 
     public GameObject gameOverUI, winUI, HUD;
+
     public GameObject starEmpty1, starEmpty2, starEmpty3;
     public GameObject starFull1, starFull2, starFull3;
-
     public GameObject starEmptyWin1, starEmptyWin2, starEmptyWin3;
     public GameObject starFullWin1, starFullWin2, starFullWin3;
 
-    public static bool gameStarted;
+    public static bool gameStarted, winLv1 = false, winLv2 = false;
 
     public AudioSource[] sounds;
     private AudioSource gemSound, starSound, splashSound, winSound, loseSound;
@@ -157,6 +157,11 @@ public class PlayerController : MonoBehaviour
     {
         winSound.Play();
         gameStarted = false;
+        winLv1 = true;
+        if(starScore > LevelsMenu.starScore)
+        {
+            LevelsMenu.starScore = starScore;
+        }   
         //ResetGameState();
         winUI.SetActive(true);
 
