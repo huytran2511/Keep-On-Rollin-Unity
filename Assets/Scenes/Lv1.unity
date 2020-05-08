@@ -9655,7 +9655,7 @@ PrefabInstance:
     - target: {fileID: 7822014916035084495, guid: 2f24cfc84691c2344973d91331ed37ba,
         type: 3}
       propertyPath: startTime
-      value: 10
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7822014916035084495, guid: 2f24cfc84691c2344973d91331ed37ba,
         type: 3}

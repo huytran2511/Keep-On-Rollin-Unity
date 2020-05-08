@@ -19,15 +19,14 @@ public class PlayerController : MonoBehaviour
     public GameObject starEmptyWin1, starEmptyWin2, starEmptyWin3;
     public GameObject starFullWin1, starFullWin2, starFullWin3;
 
-    public float speed;
-    public float startTime;
     public static bool gameStarted;
 
     public AudioSource[] sounds;
     private AudioSource gemSound, starSound, splashSound, winSound, loseSound;
 
-    private float timeLeft;
-    
+    private float startTime, timeLeft;
+    private float speed = 1000f;
+
     private Rigidbody player;
     private int gemScore, starScore;
     private GameObject[] gems, stars;
@@ -48,6 +47,7 @@ public class PlayerController : MonoBehaviour
         winSound = sounds[3];
         loseSound = sounds[4];
 
+        startTime = 60f;
         timeLeft = startTime + 5;
         timer.text = "TIME\n" + startTime.ToString("F2");
         gameStarted = false;

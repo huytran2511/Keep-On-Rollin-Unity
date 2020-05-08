@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuButtons : MonoBehaviour
 {
-    public void PlayGame()
+    public void Level1()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("Lv1");
