@@ -8,16 +8,14 @@ Inspired by Roll a Ball tutorial by Unity
 ==== ART ====
 
 
+All arts are created by myself (Huy Tran)
 
-
-********OLD**********
-All sprites and arts are created by me (Huy Tran)
+Star 3D model is created in Blender by myself (Huy Tran)
 
 
 ==== FONT ====
 
 
-********OLD**********
 LiberationSans SDF - TextMesh Pro
 
 
@@ -30,32 +28,36 @@ Beach Town Guitar Theme - Hitctrl - https://opengameart.org/content/beach-town-g
 ==== SOUND EFFECTS ====
 
 
-Winning: spuispuin - https://opengameart.org/content/won-orchestral-winning-jingle
+Gem: Brandon Morris - https://opengameart.org/content/completion-sound
 
-Water Splashes: Michel Baradari - https://opengameart.org/content/water-splashes
+Lose: Kenney - https://www.kenney.nl
 
 Star: wobbleboxx - https://opengameart.org/content/level-up-power-up-coin-get-13-sounds
 
-Gem: Brandon Morris - https://opengameart.org/content/completion-sound
+Start Countdown (3, 2, 1, Go!): Myself (Huy Tran)
+
+Water Splash: Michel Baradari - https://opengameart.org/content/water-splashes
+
+Win: spuispuin - https://opengameart.org/content/won-orchestral-winning-jingle
 
 
 ==== TUTORIAL & CODE REFERENCES ====
 
-Roll a Ball tutorial by Unity: https://www.youtube.com/watch?v=RFlh8pTf4DU&list=PLX2vGYjWbI0Q-s4_lX0h4i2zbZqlg4OfF&index=1
 
 Camera rotation around player while following: https://answers.unity.com/questions/600577/camera-rotation-around-player-while-following.html
 
-Dying and Respawning in Unity: https://www.youtube.com/watch?v=nBgCeJBMT0k
-
-
-
-********OLD**********
 Continue playing music between scenes (singleton): https://www.youtube.com/watch?v=82Mn8v55nr0
 
 Create a volume slider to change volume: https://www.youtube.com/watch?v=YOaYQrN1oYQ
 
+Creating countdown (3, 2, 1, Go!): https://forum.unity.com/threads/levelcountdown-before-start-3-2-1-go.291274/
+
+Dying and Respawning in Unity: https://www.youtube.com/watch?v=nBgCeJBMT0k
+
 How to create a pause menu: https://www.youtube.com/watch?v=JivuXdrIHK0
 
 How to put multiple audio sources on 1 gameobject: https://answers.unity.com/questions/175995/can-i-play-multiple-audiosources-from-one-gameobje.html
+
+Roll a Ball tutorial by Unity: https://www.youtube.com/watch?v=RFlh8pTf4DU&list=PLX2vGYjWbI0Q-s4_lX0h4i2zbZqlg4OfF&index=1
 
 

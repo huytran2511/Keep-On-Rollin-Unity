@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public static bool gameStarted;
 
     public AudioSource[] sounds;
-    private AudioSource gemSound, starSound, splashSound, winSound, count1, count2, count3, countGo;
+    private AudioSource gemSound, starSound, splashSound, winSound, loseSound;
 
     private float timeLeft;
     
@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
         starSound = sounds[1];
         splashSound = sounds[2];
         winSound = sounds[3];
+        loseSound = sounds[4];
 
         timeLeft = startTime + 5;
         timer.text = "TIME\n" + startTime.ToString("F2");
@@ -62,18 +63,18 @@ public class PlayerController : MonoBehaviour
 
 
 
-    void Update()
-    {
-        timeLeft -= Time.deltaTime;
-        if(timeLeft <= startTime)
-        {
-            timer.text = "TIME\n" + timeLeft.ToString("F2");
-        }
-        if(timeLeft < 0)
-        {
-            LoseGame();
-        }
-    }
+    //void Update()
+    //{
+    //    timeLeft -= Time.deltaTime;
+    //    if (timeLeft <= startTime)
+    //    {
+    //        timer.text = "TIME\n" + timeLeft.ToString("F2");
+    //    }
+    //    if (timeLeft < 0)
+    //    {
+    //        LoseGame();
+    //    }
+    //}
 
     void FixedUpdate()
     {
@@ -88,7 +89,17 @@ public class PlayerController : MonoBehaviour
             player.AddForce(movement * speed * Time.deltaTime);
             player.velocity = Quaternion.Euler(0f, moveHorizontal * rotateVelocity * Time.deltaTime, 0f) * player.velocity;
         }
-        
+
+        timeLeft -= Time.deltaTime;
+        if (timeLeft <= startTime)
+        {
+            timer.text = "TIME\n" + timeLeft.ToString("F2");
+        }
+        if (timeLeft < 0)
+        {
+            LoseGame();
+        }
+
         if (gemScore == 5)
         {
             WinGame();
@@ -104,12 +115,12 @@ public class PlayerController : MonoBehaviour
             if (count < 5 && count > 1)
             {
                 startCountdown.text = (count - 1).ToString();
-                sounds[count + 2].Play();
+                sounds[count + 3].Play();
             }
             if(count == 1)
             {
                 startCountdown.text = "GO!";
-                sounds[7].Play();
+                sounds[8].Play();
                 gameStarted = true;
             }
             //Debug.Log(count);
@@ -156,6 +167,7 @@ public class PlayerController : MonoBehaviour
     void LoseGame()
     {
         //splashSound.Play();
+        loseSound.Play();
         gameStarted = false;
         //ResetGameState();
 
