@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
-        gameStarted = true;
+        //gameStarted = true;
         player = GetComponent<Rigidbody>();
         startPos = player.position;
 

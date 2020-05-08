@@ -17,8 +17,6 @@ public class Respawn : MonoBehaviour
     {
         Invoke("RespawnPlayer", 2f);
         //RespawnPlayer();
-
-
     }
 
     void RespawnPlayer()
