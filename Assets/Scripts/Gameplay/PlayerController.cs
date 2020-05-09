@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
 {
     
     public TMP_Text gemText, winText, timer, startCountdown;
-
     public GameObject gameOverUI, winUI, HUD;
 
     //public GameObject starEmpty1, starEmpty2, starEmpty3;
@@ -122,22 +121,21 @@ public class PlayerController : MonoBehaviour
 
         if(SceneManager.GetActiveScene().name == "Lv1")
         {
-            if (gemScore == 5) //10
+            if (gemScore == 10)
             {
                 WinGame();
             }
         }
         if(SceneManager.GetActiveScene().name == "Lv2")
         {
-            if (gemScore == 10) //40
+            if (gemScore == 40)
             {
                 WinGame();
             }
         }
         if (SceneManager.GetActiveScene().name == "Lv3")
         {
-            if (gemScore == 10) //40
-            {
+            if (gemScore == 40)            {
                 WinGame();
             }
         }
@@ -273,13 +271,11 @@ public class PlayerController : MonoBehaviour
 
     void ResetGameState()
     {
-        // set player position and velocity to start
         player.position = startPos;
         player.velocity = Vector3.zero;
         player.angularVelocity = Vector3.zero;
         CameraController.offset = CameraController.originalCameraPos;
 
-        // for each gem and star, set active flag back to true
         foreach (GameObject gem in gems)
         {
             gem.SetActive(true);

@@ -1,0 +1,11 @@
+OBJECTIVE
+Collect all the Gems within the time limit
+
+THINK YOU CAN DO BETTER?
+Collect all 3 Stars while completing each level
+
+==== MOVE ====
+use ARROW KEYS or WASD keys
+
+==== PAUSE ====
+press P or ESC

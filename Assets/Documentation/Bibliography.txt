@@ -8,7 +8,7 @@ Inspired by Roll a Ball tutorial by Unity
 ==== ART ====
 
 
-All arts are created by myself (Huy Tran)
+All arts are created in Microsoft Paint and Microsoft Publisher by myself (Huy Tran)
 
 Star 3D model is created in Blender by myself (Huy Tran)
 
