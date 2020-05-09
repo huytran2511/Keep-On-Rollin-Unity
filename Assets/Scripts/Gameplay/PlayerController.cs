@@ -14,10 +14,12 @@ public class PlayerController : MonoBehaviour
 
     public GameObject gameOverUI, winUI, HUD;
 
-    public GameObject starEmpty1, starEmpty2, starEmpty3;
-    public GameObject starFull1, starFull2, starFull3;
-    public GameObject starEmptyWin1, starEmptyWin2, starEmptyWin3;
-    public GameObject starFullWin1, starFullWin2, starFullWin3;
+    //public GameObject starEmpty1, starEmpty2, starEmpty3;
+    //public GameObject starFull1, starFull2, starFull3;
+    //public GameObject starEmptyWin1, starEmptyWin2, starEmptyWin3;
+    //public GameObject starFullWin1, starFullWin2, starFullWin3;
+
+    public GameObject[] starEmpty, starFull, starEmptyWin, starFullWin;
 
     public static bool gameStarted, winLv1 = false, winLv2 = false;
 
@@ -47,7 +49,14 @@ public class PlayerController : MonoBehaviour
         winSound = sounds[3];
         loseSound = sounds[4];
 
-        startTime = 60f;
+        if(SceneManager.GetActiveScene().name == "Lv1")
+        {
+            startTime = 60f;
+        }
+        if (SceneManager.GetActiveScene().name == "Lv2")
+        {
+            startTime = 60f;
+        }
         timeLeft = startTime + 5;
         timer.text = "TIME\n" + startTime.ToString("F2");
         gameStarted = false;
@@ -100,7 +109,7 @@ public class PlayerController : MonoBehaviour
             LoseGame();
         }
 
-        if (gemScore == 5)
+        if (gemScore == 10)
         {
             WinGame();
         }
@@ -245,67 +254,67 @@ public class PlayerController : MonoBehaviour
     {
         if (starScore == 0)
         {
-            starEmpty1.SetActive(true);
-            starEmpty2.SetActive(true);
-            starEmpty3.SetActive(true);
-            starFull1.SetActive(false);
-            starFull2.SetActive(false);
-            starFull3.SetActive(false);
+            starEmpty[0].SetActive(true);
+            starEmpty[1].SetActive(true);
+            starEmpty[2].SetActive(true);
+            starFull[0].SetActive(false);
+            starFull[1].SetActive(false);
+            starFull[2].SetActive(false);
 
-            starEmptyWin1.SetActive(true);
-            starEmptyWin2.SetActive(true);
-            starEmptyWin3.SetActive(true);
-            starFullWin1.SetActive(false);
-            starFullWin2.SetActive(false);
-            starFullWin3.SetActive(false);
+            starEmptyWin[0].SetActive(true);
+            starEmptyWin[1].SetActive(true);
+            starEmptyWin[2].SetActive(true);
+            starFullWin[0].SetActive(false);
+            starFullWin[1].SetActive(false);
+            starFullWin[2].SetActive(false);
         }
         if (starScore == 1)
         {
-            starEmpty1.SetActive(false);
-            starEmpty2.SetActive(true);
-            starEmpty3.SetActive(true);
-            starFull1.SetActive(true);
-            starFull2.SetActive(false);
-            starFull3.SetActive(false);
+            starEmpty[0].SetActive(false);
+            starEmpty[1].SetActive(true);
+            starEmpty[2].SetActive(true);
+            starFull[0].SetActive(true);
+            starFull[1].SetActive(false);
+            starFull[2].SetActive(false);
 
-            starEmptyWin1.SetActive(false);
-            starEmptyWin2.SetActive(true);
-            starEmptyWin3.SetActive(true);
-            starFullWin1.SetActive(true);
-            starFullWin2.SetActive(false);
-            starFullWin3.SetActive(false);
+            starEmptyWin[0].SetActive(false);
+            starEmptyWin[1].SetActive(true);
+            starEmptyWin[2].SetActive(true);
+            starFullWin[0].SetActive(true);
+            starFullWin[1].SetActive(false);
+            starFullWin[2].SetActive(false);
         }
         if (starScore == 2)
         {
-            starEmpty1.SetActive(false);
-            starEmpty2.SetActive(false);
-            starEmpty3.SetActive(true);
-            starFull1.SetActive(true);
-            starFull2.SetActive(true);
-            starFull3.SetActive(false);
+            starEmpty[0].SetActive(false);
+            starEmpty[1].SetActive(false);
+            starEmpty[2].SetActive(true);
+            starFull[0].SetActive(true);
+            starFull[1].SetActive(true);
+            starFull[2].SetActive(false);
 
-            starEmptyWin1.SetActive(false);
-            starEmptyWin2.SetActive(false);
-            starEmptyWin3.SetActive(true);
-            starFullWin1.SetActive(true);
-            starFullWin2.SetActive(true);
-            starFullWin3.SetActive(false);
+            starEmptyWin[0].SetActive(false);
+            starEmptyWin[1].SetActive(false);
+            starEmptyWin[2].SetActive(true);
+            starFullWin[0].SetActive(true);
+            starFullWin[1].SetActive(true);
+            starFullWin[2].SetActive(false);
         }
         if (starScore == 3)
         {
-            starEmpty1.SetActive(false);
-            starEmpty2.SetActive(false);
-            starEmpty3.SetActive(false);
-            starFull1.SetActive(true);
-            starFull2.SetActive(true);
-            starFull3.SetActive(true);
+            starEmpty[0].SetActive(false);
+            starEmpty[1].SetActive(false);
+            starEmpty[2].SetActive(false);
+            starFull[0].SetActive(true);
+            starFull[1].SetActive(true);
+            starFull[2].SetActive(true);
 
-            starEmptyWin1.SetActive(false);
-            starEmptyWin2.SetActive(false);
-            starEmptyWin3.SetActive(false);
-            starFullWin1.SetActive(true);
-            starFullWin2.SetActive(true);
-            starFullWin3.SetActive(true);
+            starEmptyWin[0].SetActive(false);
+            starEmptyWin[1].SetActive(false);
+            starEmptyWin[2].SetActive(false);
+            starFullWin[0].SetActive(true);
+            starFullWin[1].SetActive(true);
+            starFullWin[2].SetActive(true);
         }
     }
 }
