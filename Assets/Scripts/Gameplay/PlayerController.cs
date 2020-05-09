@@ -22,12 +22,13 @@ public class PlayerController : MonoBehaviour
     public GameObject[] starEmpty, starFull, starEmptyWin, starFullWin;
 
     public static bool gameStarted, winLv1 = false, winLv2 = false;
+    public float speed;
 
     public AudioSource[] sounds;
     private AudioSource gemSound, starSound, splashSound, winSound, loseSound;
 
     private float startTime, timeLeft;
-    private float speed = 1000f;
+    
 
     private Rigidbody player;
     private int gemScore, starScore;
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "Lv2")
         {
-            startTime = 60f;
+            startTime = 90f;
         }
         timeLeft = startTime + 5;
         timer.text = "TIME\n" + startTime.ToString("F2");
@@ -87,16 +88,21 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         if (gameStarted)
         {
             float moveVertical = Input.GetAxis("Vertical");
             float moveHorizontal = Input.GetAxis("Horizontal");
             float rotateVelocity = 410f;
-            Vector3 movement = Camera.main.transform.forward * moveVertical;
+            Vector3 movement = Camera.main.transform.forward.normalized * moveVertical;
 
             player.angularDrag = 1f;
-            player.AddForce(movement * speed * Time.deltaTime);
-            player.velocity = Quaternion.Euler(0f, moveHorizontal * rotateVelocity * Time.deltaTime, 0f) * player.velocity;
+            if (Physics.Raycast(player.position, Vector3.down, 0.6f))
+            {
+                player.AddForce(movement * speed * Time.deltaTime);
+                player.velocity = Quaternion.Euler(0f, moveHorizontal * rotateVelocity * Time.deltaTime, 0f) * player.velocity;
+            }
+            
         }
 
         timeLeft -= Time.deltaTime;
@@ -109,10 +115,21 @@ public class PlayerController : MonoBehaviour
             LoseGame();
         }
 
-        if (gemScore == 10)
+        if(SceneManager.GetActiveScene().name == "Lv1")
         {
-            WinGame();
+            if (gemScore == 10)
+            {
+                WinGame();
+            }
         }
+        if(SceneManager.GetActiveScene().name == "Lv2")
+        {
+            if (gemScore == 40)
+            {
+                WinGame();
+            }
+        }
+        
         DisplayStar();
     }
 
@@ -207,7 +224,14 @@ public class PlayerController : MonoBehaviour
     }
     void UpdateScoreText()
     {
-        gemText.text = gemScore + "/10";
+        if (SceneManager.GetActiveScene().name == "Lv1")
+        {
+            gemText.text = gemScore + "/10";
+        }
+        if (SceneManager.GetActiveScene().name == "Lv2")
+        {
+            gemText.text = gemScore + "/40";
+        }
     }
 
     void ResetGameState()
