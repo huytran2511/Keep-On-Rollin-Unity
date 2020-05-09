@@ -1,8 +1,12 @@
+=============================================
+============== KEEP ON ROLLING ==============
+=============================================
+
 ==== GAME DESIGN ====
 
 
 Huy Tran
-Inspired by Roll a Ball tutorial by Unity
+Inspired by Super Monkey Ball by Sega
 
 
 ==== ART ====
@@ -41,7 +45,7 @@ Water Splash: Michel Baradari - https://opengameart.org/content/water-splashes
 Win: spuispuin - https://opengameart.org/content/won-orchestral-winning-jingle
 
 
-==== TUTORIAL & CODE REFERENCES ====
+==== TUTORIALS & CODE REFERENCES ====
 
 
 Camera rotation around player while following: https://answers.unity.com/questions/600577/camera-rotation-around-player-while-following.html
