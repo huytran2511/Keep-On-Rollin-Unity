@@ -7,7 +7,7 @@ using TMPro;
 public class PauseMenu : MonoBehaviour
 {
     public static bool gamePaused = false;
-    public GameObject pauseUI;
+    public GameObject pauseUI, countdownText;
 
     //void Awake()
     //{
@@ -26,6 +26,7 @@ public class PauseMenu : MonoBehaviour
                 }
                 else
                 {
+                    countdownText.SetActive(false);
                     Pause();
                 }
             }

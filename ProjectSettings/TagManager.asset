@@ -9,6 +9,7 @@ TagManager:
   - SpeedBoost
   - Star
   - Sea
+  - SpeedBoostMax
   layers:
   - Default
   - TransparentFX

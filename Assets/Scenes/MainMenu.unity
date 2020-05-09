@@ -398,12 +398,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1955652778}
-        m_MethodName: 
+      - m_Target: {fileID: 1955652783}
+        m_MethodName: Level2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3278,12 +3278,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1955652778}
-        m_MethodName: 
+      - m_Target: {fileID: 1955652783}
+        m_MethodName: Level3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6310,6 +6310,22 @@ MonoBehaviour:
   - {fileID: 719876945}
   - {fileID: 1220589946}
   - {fileID: 416873635}
+  starEmptyLv2:
+  - {fileID: 537123215}
+  - {fileID: 1463213605}
+  - {fileID: 1041468627}
+  starFullLv2:
+  - {fileID: 902208628}
+  - {fileID: 583180717}
+  - {fileID: 1082267823}
+  starEmptyLv3:
+  - {fileID: 1057410444}
+  - {fileID: 227723975}
+  - {fileID: 271716873}
+  starFullLv3:
+  - {fileID: 1261477749}
+  - {fileID: 1961305761}
+  - {fileID: 1618606593}
 --- !u!1 &1961305761
 GameObject:
   m_ObjectHideFlags: 0

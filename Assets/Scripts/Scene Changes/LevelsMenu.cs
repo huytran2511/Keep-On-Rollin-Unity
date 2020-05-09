@@ -9,9 +9,9 @@ public class LevelsMenu : MonoBehaviour
 
     //public GameObject starEmpty1, starEmpty2, starEmpty3;
     //public GameObject starFull1, starFull2, starFull3;
-    public GameObject[] starEmptyLv1, starFullLv1;
+    public GameObject[] starEmptyLv1, starFullLv1, starEmptyLv2, starFullLv2, starEmptyLv3, starFullLv3;
 
-    public static int starScore = 0;
+    public static int starScoreLv1 = 0, starScoreLv2 = 0, starScoreLv3 = 0;
 
 
     void Awake()
@@ -21,24 +21,22 @@ public class LevelsMenu : MonoBehaviour
     }
     void Update()
     {
-        //if (Player.winLv1)
-        //{
-        //    level2.interactable = true;
-        //}
-        //if (Player.winLv2)
-        //{
-        //    level3.interactable = true;
-        //}
+        if (PlayerController.winLv1)
+        {
+            level2.interactable = true;
+        }
+        if (PlayerController.winLv2)
+        {
+            level3.interactable = true;
+        }
         DisplayStar();
-
-
     }
 
     void DisplayStar()
     {
         if (PlayerController.winLv1)
         {
-            if (starScore == 0)
+            if (starScoreLv1 == 0)
             {
                 starEmptyLv1[0].SetActive(true);
                 starEmptyLv1[1].SetActive(true);
@@ -48,7 +46,7 @@ public class LevelsMenu : MonoBehaviour
                 starFullLv1[1].SetActive(false);
                 starFullLv1[2].SetActive(false);
             }
-            if (starScore == 1)
+            if (starScoreLv1 == 1)
             {
                 starEmptyLv1[0].SetActive(false);
                 starEmptyLv1[1].SetActive(true);
@@ -58,7 +56,7 @@ public class LevelsMenu : MonoBehaviour
                 starFullLv1[1].SetActive(false);
                 starFullLv1[2].SetActive(false);
             }
-            if (starScore == 2)
+            if (starScoreLv1 == 2)
             {
                 starEmptyLv1[0].SetActive(false);
                 starEmptyLv1[1].SetActive(false);
@@ -68,7 +66,7 @@ public class LevelsMenu : MonoBehaviour
                 starFullLv1[1].SetActive(true);
                 starFullLv1[2].SetActive(false);
             }
-            if (starScore == 3)
+            if (starScoreLv1 == 3)
             {
                 starEmptyLv1[0].SetActive(false);
                 starEmptyLv1[1].SetActive(false);
@@ -77,6 +75,92 @@ public class LevelsMenu : MonoBehaviour
                 starFullLv1[0].SetActive(true);
                 starFullLv1[1].SetActive(true);
                 starFullLv1[2].SetActive(true);
+            }
+        }
+        if (PlayerController.winLv2)
+        {
+            if (starScoreLv2 == 0)
+            {
+                starEmptyLv2[0].SetActive(true);
+                starEmptyLv2[1].SetActive(true);
+                starEmptyLv2[2].SetActive(true);
+
+                starFullLv2[0].SetActive(false);
+                starFullLv2[1].SetActive(false);
+                starFullLv2[2].SetActive(false);
+            }
+            if (starScoreLv2 == 1)
+            {
+                starEmptyLv2[0].SetActive(false);
+                starEmptyLv2[1].SetActive(true);
+                starEmptyLv2[2].SetActive(true);
+
+                starFullLv2[0].SetActive(true);
+                starFullLv2[1].SetActive(false);
+                starFullLv2[2].SetActive(false);
+            }
+            if (starScoreLv2 == 2)
+            {
+                starEmptyLv2[0].SetActive(false);
+                starEmptyLv2[1].SetActive(false);
+                starEmptyLv2[2].SetActive(true);
+
+                starFullLv2[0].SetActive(true);
+                starFullLv2[1].SetActive(true);
+                starFullLv2[2].SetActive(false);
+            }
+            if (starScoreLv2 == 3)
+            {
+                starEmptyLv2[0].SetActive(false);
+                starEmptyLv2[1].SetActive(false);
+                starEmptyLv2[2].SetActive(false);
+
+                starFullLv2[0].SetActive(true);
+                starFullLv2[1].SetActive(true);
+                starFullLv2[2].SetActive(true);
+            }
+        }
+        if (PlayerController.winLv3)
+        {
+            if (starScoreLv3 == 0)
+            {
+                starEmptyLv3[0].SetActive(true);
+                starEmptyLv3[1].SetActive(true);
+                starEmptyLv3[2].SetActive(true);
+
+                starFullLv3[0].SetActive(false);
+                starFullLv3[1].SetActive(false);
+                starFullLv3[2].SetActive(false);
+            }
+            if (starScoreLv3 == 1)
+            {
+                starEmptyLv3[0].SetActive(false);
+                starEmptyLv3[1].SetActive(true);
+                starEmptyLv3[2].SetActive(true);
+
+                starFullLv3[0].SetActive(true);
+                starFullLv3[1].SetActive(false);
+                starFullLv3[2].SetActive(false);
+            }
+            if (starScoreLv3 == 2)
+            {
+                starEmptyLv3[0].SetActive(false);
+                starEmptyLv3[1].SetActive(false);
+                starEmptyLv3[2].SetActive(true);
+
+                starFullLv3[0].SetActive(true);
+                starFullLv3[1].SetActive(true);
+                starFullLv3[2].SetActive(false);
+            }
+            if (starScoreLv3 == 3)
+            {
+                starEmptyLv3[0].SetActive(false);
+                starEmptyLv3[1].SetActive(false);
+                starEmptyLv3[2].SetActive(false);
+
+                starFullLv3[0].SetActive(true);
+                starFullLv3[1].SetActive(true);
+                starFullLv3[2].SetActive(true);
             }
         }
     }

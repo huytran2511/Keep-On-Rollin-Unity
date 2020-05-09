@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject[] starEmpty, starFull, starEmptyWin, starFullWin;
 
-    public static bool gameStarted, winLv1 = false, winLv2 = false;
+    public static bool gameStarted, winLv1 = false, winLv2 = false, winLv3 = false;
     public float speed;
 
     public AudioSource[] sounds;
@@ -58,6 +58,11 @@ public class PlayerController : MonoBehaviour
         {
             startTime = 90f;
         }
+        if (SceneManager.GetActiveScene().name == "Lv3")
+        {
+            startTime = 120f;
+        }
+
         timeLeft = startTime + 5;
         timer.text = "TIME\n" + startTime.ToString("F2");
         gameStarted = false;
@@ -117,19 +122,26 @@ public class PlayerController : MonoBehaviour
 
         if(SceneManager.GetActiveScene().name == "Lv1")
         {
-            if (gemScore == 10)
+            if (gemScore == 5) //10
             {
                 WinGame();
             }
         }
         if(SceneManager.GetActiveScene().name == "Lv2")
         {
-            if (gemScore == 40)
+            if (gemScore == 10) //40
             {
                 WinGame();
             }
         }
-        
+        if (SceneManager.GetActiveScene().name == "Lv3")
+        {
+            if (gemScore == 10) //40
+            {
+                WinGame();
+            }
+        }
+
         DisplayStar();
     }
 
@@ -158,7 +170,6 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        // check if the collider is of tag 'gem'
         if (collider.gameObject.CompareTag("Gem"))
         {
             collider.gameObject.SetActive(false);
@@ -183,14 +194,33 @@ public class PlayerController : MonoBehaviour
     {
         winSound.Play();
         gameStarted = false;
-        winLv1 = true;
-        if(starScore > LevelsMenu.starScore)
+        if(SceneManager.GetActiveScene().name == "Lv1")
         {
-            LevelsMenu.starScore = starScore;
-        }   
+            winLv1 = true;
+            if (starScore > LevelsMenu.starScoreLv1)
+            {
+                LevelsMenu.starScoreLv1 = starScore;
+            }
+        }
+        if (SceneManager.GetActiveScene().name == "Lv2")
+        {
+            winLv2 = true;
+            if (starScore > LevelsMenu.starScoreLv2)
+            {
+                LevelsMenu.starScoreLv2 = starScore;
+            }
+        }
+        if(SceneManager.GetActiveScene().name == "Lv3")
+        {
+            winLv3 = true;
+            if (starScore > LevelsMenu.starScoreLv3)
+            {
+                LevelsMenu.starScoreLv3 = starScore;
+            }
+        }
+
         //ResetGameState();
         winUI.SetActive(true);
-
         HUD.SetActive(false);
         Time.timeScale = 0f;
     }
@@ -214,12 +244,15 @@ public class PlayerController : MonoBehaviour
         {
             player.AddForce(player.velocity.normalized * 400.0f * Time.deltaTime, ForceMode.Impulse);
         }
+        if (collision.gameObject.CompareTag("SpeedBoostMax"))
+        {
+            player.AddForce(player.velocity.normalized * 1015.0f * Time.deltaTime, ForceMode.Impulse);
+        }
         if (collision.gameObject.CompareTag("Respawn"))
         {
             player.velocity = Vector3.zero;
             player.angularVelocity = Vector3.zero;
             gameStarted = false;
-            //splashSound.Play();
         }
     }
     void UpdateScoreText()
@@ -229,6 +262,10 @@ public class PlayerController : MonoBehaviour
             gemText.text = gemScore + "/10";
         }
         if (SceneManager.GetActiveScene().name == "Lv2")
+        {
+            gemText.text = gemScore + "/40";
+        }
+        if (SceneManager.GetActiveScene().name == "Lv3")
         {
             gemText.text = gemScore + "/40";
         }
