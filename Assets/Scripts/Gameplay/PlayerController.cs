@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
     private AudioSource gemSound, starSound, splashSound, winSound, loseSound;
 
     private float startTime, timeLeft;
-    
 
     private Rigidbody player;
     private int gemScore, starScore;
@@ -59,7 +58,7 @@ public class PlayerController : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "Lv3")
         {
-            startTime = 120f;
+            startTime = 150f;
         }
 
         timeLeft = startTime + 5;

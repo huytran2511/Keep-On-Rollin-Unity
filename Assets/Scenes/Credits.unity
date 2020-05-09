@@ -1217,7 +1217,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\n==============================\n======= KEEP ON ROLLING ======\n==============================\n\n\n====
+  m_text: "\n\n=============================\n======= KEEP ON ROLLIN' ======\n=============================\n\n\n====
     GAME DESIGN ====\n\r\nHuy Tran\r\nInspired by Super Monkey Ball by Sega\r\n\r\n====
     ART ====\n\r\nHuy Tran\nAll arts are created in Microsoft Paint and Microsoft
     Publisher\nStar 3D model is created in Blender\n\r\n==== FONT ====\n\r\nLiberationSans
@@ -1302,7 +1302,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1280731497}
-    characterCount: 1816
+    characterCount: 1814
     spriteCount: 0
     spaceCount: 188
     wordCount: 223
