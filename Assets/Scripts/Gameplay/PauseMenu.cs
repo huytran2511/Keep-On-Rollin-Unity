@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool gamePaused = false;
     public GameObject pauseUI, countdownText;
-
-    //void Awake()
-    //{
-    //    pauseUI.SetActive(false);
-    //}
 
     void Update()
     {

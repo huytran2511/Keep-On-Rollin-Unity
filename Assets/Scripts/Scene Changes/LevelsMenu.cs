@@ -6,13 +6,8 @@ using UnityEngine.UI;
 public class LevelsMenu : MonoBehaviour
 {
     public Button level2, level3;
-
-    //public GameObject starEmpty1, starEmpty2, starEmpty3;
-    //public GameObject starFull1, starFull2, starFull3;
     public GameObject[] starEmptyLv1, starFullLv1, starEmptyLv2, starFullLv2, starEmptyLv3, starFullLv3;
-
     public static int starScoreLv1 = 0, starScoreLv2 = 0, starScoreLv3 = 0;
-
 
     void Awake()
     {

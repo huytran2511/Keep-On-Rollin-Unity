@@ -12,34 +12,24 @@ public class PlayerController : MonoBehaviour
     
     public TMP_Text gemText, winText, timer, startCountdown;
     public GameObject gameOverUI, winUI, HUD;
-
-    //public GameObject starEmpty1, starEmpty2, starEmpty3;
-    //public GameObject starFull1, starFull2, starFull3;
-    //public GameObject starEmptyWin1, starEmptyWin2, starEmptyWin3;
-    //public GameObject starFullWin1, starFullWin2, starFullWin3;
-
     public GameObject[] starEmpty, starFull, starEmptyWin, starFullWin;
-
     public static bool gameStarted, winLv1 = false, winLv2 = false, winLv3 = false;
     public float speed;
-
     public AudioSource[] sounds;
+
     private AudioSource gemSound, starSound, splashSound, winSound, loseSound;
-
     private float startTime, timeLeft;
-
     private Rigidbody player;
     private int gemScore, starScore;
     private GameObject[] gems, stars;
     private Vector3 startPos;
-    //private bool gameStarted;
 
     void Start()
     {
         Time.timeScale = 1f;
-        //gameStarted = true;
         player = GetComponent<Rigidbody>();
         startPos = player.position;
+        gameStarted = false;
 
         sounds = GetComponents<AudioSource>();
         gemSound = sounds[0];
@@ -63,7 +53,6 @@ public class PlayerController : MonoBehaviour
 
         timeLeft = startTime + 5;
         timer.text = "TIME\n" + startTime.ToString("F2");
-        gameStarted = false;
 
         gems = GameObject.FindGameObjectsWithTag("Gem");
         stars = GameObject.FindGameObjectsWithTag("Star");
@@ -74,38 +63,21 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(Countdown(6));
     }
 
-
-
-    //void Update()
-    //{
-    //    timeLeft -= Time.deltaTime;
-    //    if (timeLeft <= startTime)
-    //    {
-    //        timer.text = "TIME\n" + timeLeft.ToString("F2");
-    //    }
-    //    if (timeLeft < 0)
-    //    {
-    //        LoseGame();
-    //    }
-    //}
-
     void FixedUpdate()
     {
-        
         if (gameStarted)
         {
             float moveVertical = Input.GetAxis("Vertical");
             float moveHorizontal = Input.GetAxis("Horizontal");
             float rotateVelocity = 410f;
             Vector3 movement = Camera.main.transform.forward.normalized * moveVertical;
-
             player.angularDrag = 1f;
+
             if (Physics.Raycast(player.position, Vector3.down, 0.6f))
             {
                 player.AddForce(movement * speed * Time.deltaTime);
                 player.velocity = Quaternion.Euler(0f, moveHorizontal * rotateVelocity * Time.deltaTime, 0f) * player.velocity;
             }
-            
         }
 
         timeLeft -= Time.deltaTime;
@@ -134,7 +106,8 @@ public class PlayerController : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "Lv3")
         {
-            if (gemScore == 40)            {
+            if (gemScore == 40)
+            {
                 WinGame();
             }
         }
@@ -158,7 +131,6 @@ public class PlayerController : MonoBehaviour
                 sounds[8].Play();
                 gameStarted = true;
             }
-            //Debug.Log(count);
             yield return new WaitForSeconds(1);
             count--;
         }
@@ -216,7 +188,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //ResetGameState();
         winUI.SetActive(true);
         HUD.SetActive(false);
         Time.timeScale = 0f;
@@ -224,13 +195,9 @@ public class PlayerController : MonoBehaviour
 
     void LoseGame()
     {
-        //splashSound.Play();
         loseSound.Play();
         gameStarted = false;
-        //ResetGameState();
-
         gameOverUI.SetActive(true);
-
         HUD.SetActive(false);
         Time.timeScale = 0f;
     }
@@ -286,23 +253,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void PlayAgain()
-    {
-        //Time.timeScale = 1f;
-        //ResetGameState();      
-        //timeLeft = startTime;
-
-        //// reset score
-        //gemScore = 0;
-        //starScore = 0;
-        //UpdateScoreText();
-
-        //// reset UI
-        //HUD.SetActive(true);
-        //gameOverUI.SetActive(false);
-        //winUI.SetActive(false);
-
-        //gameStarted = true;
-        
+    {    
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
