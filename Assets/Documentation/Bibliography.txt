@@ -1,6 +1,14 @@
+Author: Huy Tran
+Red ID: 818608122
+Course: CS-583
+University: San Diego State University
+Release Date: May 2020
+
+
 =============================================
 ============== KEEP ON ROLLIN' ==============
 =============================================
+
 
 ==== GAME DESIGN ====
 
@@ -11,10 +19,9 @@ Inspired by Super Monkey Ball by Sega
 
 ==== ART ====
 
-
-All arts are created in Microsoft Paint and Microsoft Publisher by myself (Huy Tran)
-
-Star 3D model is created in Blender by myself (Huy Tran)
+Huy Tran
+All arts are created in Microsoft Paint and Microsoft Publisher
+Star 3D model is created in Blender
 
 
 ==== FONT ====

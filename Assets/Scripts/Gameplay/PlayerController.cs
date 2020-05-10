@@ -235,23 +235,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void ResetGameState()
-    {
-        player.position = startPos;
-        player.velocity = Vector3.zero;
-        player.angularVelocity = Vector3.zero;
-        CameraController.offset = CameraController.originalCameraPos;
-
-        foreach (GameObject gem in gems)
-        {
-            gem.SetActive(true);
-        }
-        foreach (GameObject star in stars)
-        {
-            star.SetActive(true);
-        }
-    }
-
     public void PlayAgain()
     {    
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
